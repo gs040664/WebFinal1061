@@ -1,0 +1,18 @@
+<ngb-carousel>
+  <ng-template ngbSlide *ngFor="let slide of slides">
+    <img src="https://lorempixel.com/1920/500?r=1" alt="Random first slide">
+    <div class="carousel-caption">
+      <h3>{{slide.firstTitle}}</h3>
+      <p>{{slide.secondTitle}}</p>
+    </div>
+  </ng-template>
+</ngb-carousel>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-2">
+      <a class="btn btn-primary" routerLink="/list" role="button">列表頁</a>
+    </div>
+  </div>
+</div>
