@@ -1,4 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import {
+  AngularFirestore,
+  AngularFirestoreCollection,
+  AngularFirestoreDocument
+} from 'angularfire2/firestore';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
 
 @Component({
   selector: 'app-home',
@@ -6,22 +13,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  slides = [
-    {
-      firstTitle: '1',
-      secondTitle: '111'
-    },
-    {
-      firstTitle: '2',
-      secondTitle: '222'
-    },
-    {
-      firstTitle: '3',
-      secondTitle: '333'
-    }
-  ];
-
-  constructor() {}
+  constructor(private afs: AngularFirestore) {}
 
   ngOnInit() {}
 }
