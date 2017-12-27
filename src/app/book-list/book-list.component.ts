@@ -18,7 +18,7 @@ import { Book } from '../public/book.class';
 export class BookListComponent implements OnInit {
   booksCol: AngularFirestoreCollection<Book>;
   books: Observable<Book[]>;
-  bookFilterArgs: Book;
+  bookFilterArgs;
 
   constructor(private route: ActivatedRoute, private afs: AngularFirestore) {}
 

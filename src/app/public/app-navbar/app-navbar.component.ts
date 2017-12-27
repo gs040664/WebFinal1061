@@ -22,7 +22,6 @@ export class AppNavbarComponent implements OnInit {
   }
 
   changeSearchType(i) {
-    console.log(i);
     this.currentSearchType = this.searchTypes[i];
   }
 
@@ -30,5 +29,6 @@ export class AppNavbarComponent implements OnInit {
     this.searchQuery[this.currentSearchType.type] = this.searchInput;
     this.router.navigate(['list'], { queryParams: this.searchQuery });
     this.searchQuery = {};
+    this.searchInput = '';
   }
 }
