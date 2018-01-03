@@ -3,6 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+
+import { ShoppingCarModalComponent } from '../shopping-car-modal/shopping-car-modal.component';
 
 @Component({
   selector: 'app-navbar',
@@ -18,10 +21,13 @@ export class AppNavbarComponent implements OnInit {
   searchInput: string;
   searchQuery: object = {};
   currentUser;
+
+  shoppingCarModalRef;
   constructor(
     public afAuth: AngularFireAuth,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    private modalService: NgbModal
   ) {}
 
   ngOnInit() {
@@ -45,5 +51,14 @@ export class AppNavbarComponent implements OnInit {
 
   logout() {
     this.afAuth.auth.signOut();
+  }
+
+  launchModal() {
+    this.shoppingCarModalRef = this.modalService.open(
+      ShoppingCarModalComponent
+    );
+    this.shoppingCarModalRef.result.then(a => {
+      console.log(a);
+    });
   }
 }

@@ -45,6 +45,11 @@
         <a class="btn btn-warning text-white my-2 my-sm-0" routerLink="/auth/login">登入
         </a>
       </li>
+      <li class="nav-item mr-2" *ngIf="currentUser">
+        <button role="button" class="btn btn-success text-white my-2 my-sm-0" (click)="launchModal()">
+          <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+        </button>
+      </li>
       <li class="navbar-text mr-2" *ngIf="currentUser">
         {{currentUser.email}}
       </li>

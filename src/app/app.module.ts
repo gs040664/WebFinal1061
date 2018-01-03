@@ -16,6 +16,7 @@ import { BookListComponent } from './book-list/book-list.component';
 import { BookFilterPipe } from './public/book-filter/book-filter.pipe';
 import { SignupComponent } from './auth/signup/signup.component';
 import { LoginComponent } from './auth/login/login.component';
+import { ShoppingCarModalComponent } from './public/shopping-car-modal/shopping-car-modal.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { LoginComponent } from './auth/login/login.component';
     BookListComponent,
     BookFilterPipe,
     SignupComponent,
-    LoginComponent
+    LoginComponent,
+    ShoppingCarModalComponent
   ],
   imports: [
     BrowserModule,
@@ -36,6 +38,7 @@ import { LoginComponent } from './auth/login/login.component';
     AppRoutingModule,
     NgbModule.forRoot()
   ],
+  entryComponents: [ShoppingCarModalComponent],
   providers: [],
   bootstrap: [AppComponent]
 })
