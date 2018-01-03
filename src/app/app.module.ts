@@ -14,6 +14,8 @@ import { AppNavbarComponent } from './public/app-navbar/app-navbar.component';
 import { HomeComponent } from './home/home.component';
 import { BookListComponent } from './book-list/book-list.component';
 import { BookFilterPipe } from './public/book-filter/book-filter.pipe';
+import { SignupComponent } from './auth/signup/signup.component';
+import { LoginComponent } from './auth/login/login.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { BookFilterPipe } from './public/book-filter/book-filter.pipe';
     AppNavbarComponent,
     HomeComponent,
     BookListComponent,
-    BookFilterPipe
+    BookFilterPipe,
+    SignupComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
