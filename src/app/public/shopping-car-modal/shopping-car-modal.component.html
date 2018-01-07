@@ -5,7 +5,8 @@
   </button>
 </div>
 <div class="modal-body">
-  <p>One fine body&hellip;</p>
+  <p *ngFor="let book of bookList | async">{{book.name}}</p>
+  <button type="button" class="btn btn-secondary" (click)="initList()">initList</button>
 </div>
 <div class="modal-footer">
   <button type="button" class="btn btn-secondary" (click)="activeModal.close('Close click')">繼續選購</button>
