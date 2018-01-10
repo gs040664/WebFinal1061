@@ -46,6 +46,5 @@ export class BookListComponent implements OnInit {
 
   addBook(book) {
     this.shoppingCarService.add(book);
-    alert('已加入購物車！');
   }
 }

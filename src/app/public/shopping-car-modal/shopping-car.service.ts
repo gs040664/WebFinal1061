@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Book } from '../book.class';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
   AngularFirestore,
   AngularFirestoreDocument,
@@ -16,7 +17,12 @@ export class ShoppingCarService {
   currentUser;
   private listRef: AngularFirestoreCollection<Book>;
   list: Observable<Book[]>;
-  constructor(public afAuth: AngularFireAuth, private afs: AngularFirestore) {
+  constructor(
+    public afAuth: AngularFireAuth,
+    private afs: AngularFirestore,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
     this.afAuth.authState.subscribe(auth => {
       this.currentUser = auth;
       if (auth) {
@@ -49,9 +55,16 @@ export class ShoppingCarService {
   }
 
   add(book) {
-    console.log(this.list);
-    book.quantity = 1;
-    this.listRef.add(book);
+    console.log(this.currentUser == null);
+    if (this.currentUser) {
+      console.log(this.list);
+      book.quantity = 1;
+      this.listRef.add(book);
+      alert('已加入購物車！');
+    } else {
+      alert('請先登入！');
+      this.router.navigate(['auth/login']);
+    }
   }
 
   delete(book) {
