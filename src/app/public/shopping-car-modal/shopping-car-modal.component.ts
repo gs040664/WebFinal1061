@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { ShoppingCarService } from './shopping-car.service';
+import { totalmem } from 'os';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-shopping-car-modal',
@@ -11,6 +13,7 @@ import { ShoppingCarService } from './shopping-car.service';
 })
 export class ShoppingCarModalComponent implements OnInit {
   bookList;
+  totalPrice: Observable<number>;
 
   constructor(
     public activeModal: NgbActiveModal,
@@ -19,13 +22,20 @@ export class ShoppingCarModalComponent implements OnInit {
 
   ngOnInit() {
     this.bookList = this.shoppingCarService.getList();
+    this.totalPrice = this.shoppingCarService.getTotalPrice();
   }
 
   checkout() {
     console.log('FK');
   }
 
-  initList() {
-    this.shoppingCarService.init();
+  delete(book) {
+    console.log(book);
+    this.shoppingCarService.delete(book);
+  }
+
+  updateQuantity(event, book) {
+    console.log(event);
+    this.shoppingCarService.update(book);
   }
 }

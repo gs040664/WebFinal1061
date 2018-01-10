@@ -17,6 +17,7 @@ import { BookFilterPipe } from './public/book-filter/book-filter.pipe';
 import { SignupComponent } from './auth/signup/signup.component';
 import { LoginComponent } from './auth/login/login.component';
 import { ShoppingCarModalComponent } from './public/shopping-car-modal/shopping-car-modal.component';
+import { BookSingleComponent } from './book-single/book-single.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ShoppingCarModalComponent } from './public/shopping-car-modal/shopping-
     BookFilterPipe,
     SignupComponent,
     LoginComponent,
-    ShoppingCarModalComponent
+    ShoppingCarModalComponent,
+    BookSingleComponent
   ],
   imports: [
     BrowserModule,

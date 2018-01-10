@@ -5,10 +5,31 @@
   </button>
 </div>
 <div class="modal-body">
-  <p *ngFor="let book of bookList | async">{{book.name}}</p>
-  <button type="button" class="btn btn-secondary" (click)="initList()">initList</button>
+  <h2 class="text-center" *ngIf="(bookList | async)?.length==0">尚未選擇商品</h2>
+  <div class="grid" *ngFor="let book of bookList | async">
+    <div class="row mb-2">
+      <div class="col-3">
+        <img class="img-fluid" src="{{book.coverImg}}" alt="book image">
+      </div>
+      <div class="col-7">
+        <p>{{book.name}}</p>
+        <p>售價：{{book.price}}元</p>
+        <div class="form-inline">
+          <label for="quantity">數量：</label>
+          <input type="number" class="form-control" id="quantity" [(ngModel)]="book.quantity" (focusout)="updateQuantity($event,book)"
+            min="1" max="99">
+        </div>
+      </div>
+      <div class="col-2">
+        <button type="button" class="btn btn-danger" (click)="delete(book)">
+          <i class="fa fa-trash" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
 <div class="modal-footer">
+  <p class="mr-auto my-auto">總價：{{totalPrice|async}}</p>
   <button type="button" class="btn btn-secondary" (click)="activeModal.close('Close click')">繼續選購</button>
   <button type="button" class="btn btn-primary" (click)="checkout()">結帳</button>
 </div>

@@ -1,0 +1,31 @@
+<div class="container mt-3">
+  <div class="grid">
+    <div class="row">
+      <div class="col-3">
+        <div class="card bg-white text-white">
+          <img class="card-img" src="{{(book|async)?.coverImg}}" alt="book image">
+          <div class="card-img-overlay">
+          </div>
+        </div>
+      </div>
+      <div class="col-7">
+        <h2>{{(book|async)?.name}}</h2>
+        <h4>售價：{{(book|async)?.price}}元</h4>
+        <p>{{(book|async)?.author}}</p>
+        <p>分類：{{(book|async)?.category}}</p>
+        <p>　　{{(book|async)?.index}}</p>
+      </div>
+      <div class="col-2">
+        <div class="card">
+          <div class="card-body">
+            <p>
+              <b>尚有庫存</b>
+            </p>
+            <input type="number" class="form-control mb-3" id="quantity" min="1" max="99">
+            <button class="btn btn-primary btn-block">購買</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

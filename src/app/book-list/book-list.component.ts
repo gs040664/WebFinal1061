@@ -30,7 +30,14 @@ export class BookListComponent implements OnInit {
 
   ngOnInit() {
     this.booksCol = this.afs.collection('books');
-    this.books = this.booksCol.valueChanges();
+    this.books = this.booksCol.snapshotChanges().map(actions => {
+      return actions.map(a => {
+        const data = a.payload.doc.data() as Book;
+        data.authors = data.author.split('　');
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      });
+    });
     this.route.queryParams.subscribe(params => {
       console.log(params);
       this.bookFilterArgs = params;
@@ -39,5 +46,6 @@ export class BookListComponent implements OnInit {
 
   addBook(book) {
     this.shoppingCarService.add(book);
+    alert('已加入購物車！');
   }
 }

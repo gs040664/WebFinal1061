@@ -5,7 +5,8 @@ import * as firebase from 'firebase/app';
 import {
   AngularFirestore,
   AngularFirestoreDocument,
-  AngularFirestoreCollection
+  AngularFirestoreCollection,
+  DocumentChangeAction
 } from 'angularfire2/firestore';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
@@ -18,26 +19,49 @@ export class ShoppingCarService {
   constructor(public afAuth: AngularFireAuth, private afs: AngularFirestore) {
     this.afAuth.authState.subscribe(auth => {
       this.currentUser = auth;
-      console.log(auth);
-      this.listRef = this.afs.collection(
-        'shoppingLists/' + this.currentUser.email + '/shoppingList'
-      );
-      this.list = this.listRef.valueChanges();
+      if (auth) {
+        this.listRef = this.afs.collection(
+          'shoppingLists/' + this.currentUser.email + '/shoppingList'
+        );
+        this.list = this.listRef.snapshotChanges().map(actions => {
+          return actions.map(a => {
+            const data = a.payload.doc.data() as Book;
+            const shoppingListId = a.payload.doc.id;
+            return { shoppingListId, ...data };
+          });
+        });
+      }
     });
   }
 
   getList() {
-    return this.list;
+    return this.list.map(list => {
+      return list;
+    });
   }
 
-  init() {}
+  getTotalPrice() {
+    return this.list.map(list => {
+      return list
+        .map(book => book.price * book.quantity)
+        .reduce((total, price) => total + price, 0);
+    });
+  }
 
   add(book) {
     console.log(this.list);
+    book.quantity = 1;
     this.listRef.add(book);
   }
 
-  delete() {}
+  delete(book) {
+    console.log(book);
+    this.listRef.doc(book.shoppingListId).delete();
+  }
+
+  update(book) {
+    this.listRef.doc(book.shoppingListId).update(book);
+  }
 
   private handleError(error) {
     console.log(error);

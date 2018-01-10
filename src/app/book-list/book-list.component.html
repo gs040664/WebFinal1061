@@ -1,14 +1,19 @@
 <div class="container mt-3">
+  <h2 class="text-center mt-5" *ngIf="(books | async | bookFilter:bookFilterArgs)?.length==0">查無相關書籍</h2>
   <div class="grid">
     <div class="row">
-      <div class="col-3" *ngFor="let book of books | async | bookFilter:bookFilterArgs">
+      <div class="col-3 card-deck mx-0 px-0" *ngFor="let book of books | async | bookFilter:bookFilterArgs">
         <div class="card mb-3">
-          <img class="card-img-top" src="{{book.coverImg}}" alt="Card image cap">
+          <a [routerLink]="['/single',book.id]">
+            <img class="card-img-top" src="{{book.coverImg}}" alt="Card image cap">
+          </a>
           <div class="card-body">
             <h4 class="card-title">{{book.name}}</h4>
-            <p class="card-text">{{book.author}}</p>
-            <p class="card-text text-danger">{{book.price}}元
+            <p class="card-text mb-0" *ngFor="let author of book.authors">{{author}}</p>
+            <p class="card-text text-danger mt-2">{{book.price}}元
             </p>
+          </div>
+          <div class="card-footer">
             <button type="button" class="btn btn-primary btn-lg btn-block" (click)="addBook(book)">加入購物車</button>
           </div>
         </div>
