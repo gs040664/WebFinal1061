@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { ShoppingCarService } from './shopping-car.service';
-import { totalmem } from 'os';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
